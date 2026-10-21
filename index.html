@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c62828">
+  <meta name="description" content="Media pembelajaran IPAS sejarah kelas VI: Misi Penjaga Warisan Nusantara.">
+  <title>Misi Penjaga Warisan Nusantara | Kelas VI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <section id="loginScreen" class="login-screen" aria-labelledby="loginTitle">
+      <div class="login-art" aria-hidden="true">
+        <div class="sun-disc"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div>
+        <div class="temple">🏛️</div><div class="compass">✦<small>N</small></div>
+        <div class="floating-card card-one">📜 <span>Jejak sejarah</span></div>
+        <div class="floating-card card-two">🧭 <span>Mulai petualangan</span></div>
+      </div>
+      <div class="login-content">
+        <div class="brand-mark"><span class="brand-emoji">🦅</span><span>JELAJAH NUSANTARA<small>LAB SEJARAH KELAS VI</small></span></div>
+        <p class="eyebrow">IPAS • PETUALANGAN SEJARAH</p>
+        <h1 id="loginTitle">Misi Penjaga<br><em>Warisan Nusantara</em></h1>
+        <p class="login-lead">Buka kapsul waktu, temukan jejak pahlawan, dan jadilah Detektif Waktu!</p>
+        <!-- GANTI GAMBAR DI SINI: ilustrasi Garu menggunakan SVG inline. Cantumkan kredit jika diganti foto. -->
+        <div class="mascot-welcome">
+          <div class="garu-avatar" aria-hidden="true"><svg viewBox="0 0 120 120" role="img" aria-label="Garu, anak burung Garuda berkacamata"><path d="M23 37 9 14 42 28 54 12 70 29 105 17 91 44" fill="#d99b26" stroke="#7b4d15" stroke-width="3" stroke-linejoin="round"/><path d="M25 44Q60 18 95 44L88 82Q60 111 32 82Z" fill="#e9b448" stroke="#7b4d15" stroke-width="3"/><path d="M35 57Q45 47 56 57Q66 47 78 57L76 69Q65 78 58 68Q48 78 37 69Z" fill="#fffaf0" stroke="#7b4d15" stroke-width="3"/><circle cx="46" cy="61" r="3.5" fill="#25334a"/><circle cx="68" cy="61" r="3.5" fill="#25334a"/><path d="M54 69 61 69 57 76Z" fill="#c62828"/><path d="M39 83Q60 95 81 83L75 96 60 101 45 96Z" fill="#c62828"/><path d="M42 86 78 86" stroke="#fff" stroke-width="5"/><circle cx="43" cy="60" r="13" fill="none" stroke="#25334a" stroke-width="4"/><circle cx="69" cy="60" r="13" fill="none" stroke="#25334a" stroke-width="4"/><path d="M56 59h0" stroke="#25334a" stroke-width="5"/><path d="M39 43Q60 32 80 43" fill="none" stroke="#7b4d15" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div><strong>Halo, Detektif!</strong><p>Garu siap menemanimu menyelidiki kisah perjuangan bangsa.</p></div>
+        </div>
+        <form id="loginForm" class="login-form">
+          <label for="studentName">Nama Detektif</label>
+          <input id="studentName" name="studentName" type="text" maxlength="40" placeholder="Tulis namamu di sini" autocomplete="given-name" required>
+          <label for="studentClass">Kelas</label>
+          <input id="studentClass" name="studentClass" type="text" value="VI" readonly aria-readonly="true">
+          <button class="btn btn-primary btn-block" type="submit">Mulai Belajar <span aria-hidden="true">➜</span></button>
+        </form>
+        <p class="login-footnote">Siapkan rasa ingin tahu. Perjalanan sejarah segera dimulai!</p>
+      </div>
+    </section>
+
+    <div id="learningApp" class="learning-app hidden">
+      <aside class="sidebar" id="sidebar">
+        <a href="#dashboard" class="brand-lockup" data-nav="dashboard" aria-label="Kembali ke dashboard">
+          <span class="brand-symbol">🧭</span><span class="brand-name">Jelajah<span>Nusantara</span><small>IPAS • KELAS VI</small></span>
+        </a>
+        <div class="sidebar-student"><div class="student-avatar" aria-hidden="true">🕵️</div><div><small>DETEKTIF WAKTU</small><strong id="sidebarName">Penjelajah</strong><span id="sidebarLevel">Murid Baru</span></div></div>
+        <nav class="side-nav" aria-label="Navigasi utama">
+          <p class="nav-caption">PETUALANGAN</p>
+          <button class="nav-item active" data-nav="dashboard"><span>🏕️</span> Dashboard</button>
+          <button class="nav-item" data-nav="materi"><span>📚</span> Buku Materi</button>
+          <button class="nav-item" data-nav="aktivitas"><span>🧩</span> Aktivitas & Misi <i id="missionNavDot">1/4</i></button>
+          <button class="nav-item" data-nav="kuis"><span>🎯</span> Zona Kuis</button>
+          <button class="nav-item" data-nav="hasil"><span>🏆</span> Hasil Belajar</button>
+          <p class="nav-caption nav-caption-spaced">PANDUAN</p>
+          <button class="nav-item" data-nav="petunjuk"><span>💡</span> Petunjuk</button>
+          <button class="nav-item" data-nav="tentang"><span>📜</span> Tentang Media</button>
+        </nav>
+        <div class="sidebar-bottom"><div class="passport-mini"><span>🛂</span><div><strong>Paspor Sejarah</strong><small><span id="stampCount">0</span> stempel terkumpul</small></div></div><button class="text-button" id="resetDataBtn" type="button">↻ Hapus data belajar</button></div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <button id="mobileMenuBtn" class="icon-button mobile-only" aria-label="Buka menu">☰</button>
+          <div class="breadcrumb"><span>Jelajah Nusantara</span><span class="crumb-sep">/</span><strong id="pageBreadcrumb">Dashboard</strong></div>
+          <div class="top-actions"><button id="fontDown" class="utility-button" aria-label="Perkecil huruf" title="Perkecil huruf">A−</button><button id="fontUp" class="utility-button" aria-label="Perbesar huruf" title="Perbesar huruf">A+</button><button id="toggleGaru" class="garu-toggle" type="button">🦅 <span>Sembunyikan Garu</span></button></div>
+        </header>
+        <div id="content" class="content-area" tabindex="-1"></div>
+        <footer class="app-footer"><span>🧭 Misi Penjaga Warisan Nusantara</span><span>Belajar sejarah, menjaga teladan.</span></footer>
+      </main>
+      <nav class="bottom-nav" aria-label="Navigasi ponsel">
+        <button data-nav="dashboard" class="active"><span>🏕️</span><small>Beranda</small></button>
+        <button data-nav="materi"><span>📚</span><small>Materi</small></button>
+        <button data-nav="aktivitas"><span>🧩</span><small>Misi</small></button>
+        <button data-nav="kuis"><span>🎯</span><small>Kuis</small></button>
+        <button data-nav="hasil"><span>🏆</span><small>Hasil</small></button>
+      </nav>
+    </div>
+  </div>
+
+  <div id="garuBubble" class="garu-bubble" role="status" aria-live="polite">
+    <div class="bubble-avatar" aria-hidden="true">🦅</div><div class="bubble-copy"><strong>Pesan Garu</strong><p id="garuMessage">Halo, Detektif! Ayo mulai petualanganmu.</p></div><button id="closeGaruBubble" class="bubble-close" aria-label="Tutup pesan Garu">×</button>
+  </div>
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <div id="modalRoot"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="script.js"></script>
+</body>
+</html>
